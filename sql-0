@@ -1,0 +1,154 @@
+ describe student;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID					   NOT NULL VARCHAR2(5)
+ NAME						    VARCHAR2(2)
+
+SQL> alter table student  
+  2  add LOC char(5);
+
+Table altered.
+
+SQL> describe student;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID					   NOT NULL VARCHAR2(5)
+ NAME						    VARCHAR2(2)
+ LOC						    CHAR(5)
+
+SQL> alter table student 
+  2  add marks number(5);
+
+Table altered.
+
+SQL> describe student;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID					   NOT NULL VARCHAR2(5)
+ NAME						    VARCHAR2(2)
+ LOC						    CHAR(5)
+ MARKS						    NUMBER(5)
+
+SQL> insert into student values(12,'pranjali','ddn',406);
+insert into student values(12,'pranjali','ddn',406)
+                              *
+ERROR at line 1:
+ORA-12899: value too large for column "PRANJALI"."STUDENT"."NAME" (actual: 8,
+maximum: 2)
+
+
+SQL> alter table student 
+  2  drop column NAME;    
+
+Table altered.
+
+SQL> describe student;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID					   NOT NULL VARCHAR2(5)
+ LOC						    CHAR(5)
+ MARKS						    NUMBER(5)
+
+SQL> alter table student 
+  2  add Name varchar(7);
+
+Table altered.
+
+SQL> describe student;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID					   NOT NULL VARCHAR2(5)
+ LOC						    CHAR(5)
+ MARKS						    NUMBER(5)
+ NAME						    VARCHAR2(7)
+
+SQL> insert into student values(48,'ddn',12,'pranjali');
+insert into student values(48,'ddn',12,'pranjali')
+                                       *
+ERROR at line 1:
+ORA-12899: value too large for column "PRANJALI"."STUDENT"."NAME" (actual: 8,
+maximum: 7)
+
+
+SQL> insert into student values(48,'ddn',12,'prachi');
+
+1 row created.
+
+SQL> show student;
+SP2-0158: unknown SHOW option "student"
+SQL> show tables;
+SP2-0158: unknown SHOW option "tables"
+SQL> insert into student(59,'ddn',14,'sejal')';
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into student(59,'ddn',14,'sejal');
+insert into student(59,'ddn',14,'sejal')
+                    *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into student values(59,'ddn',14,'sejal');
+
+1 row created.
+
+SQL> select * from student;
+
+ID    LOC	 MARKS NAME
+----- ----- ---------- -------
+48    ddn	    12 prachi
+59    ddn	    14 sejal
+
+SQL> alter table student  
+  2      
+SQL> describe student 
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID					   NOT NULL VARCHAR2(5)
+ LOC						    CHAR(5)
+ MARKS						    NUMBER(5)
+ NAME						    VARCHAR2(7)
+
+SQL> alter table student 
+  2  add constraint 
+  3  student_id_unique UNIQUE (id);
+
+Table altered.
+
+SQL> describe student;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID					   NOT NULL VARCHAR2(5)
+ LOC						    CHAR(5)
+ MARKS						    NUMBER(5)
+ NAME						    VARCHAR2(7)
+
+SQL> insert into student values(48,'ddn',12,'vaish');
+insert into student values(48,'ddn',12,'vaish')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (PRANJALI.STUDENT_ID_UNIQUE) violated
+
+
+SQL> select * from pranjali;
+select * from pranjali
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from pranjali;
+select * from pranjali
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from student;
+
+ID    LOC	 MARKS NAME
+----- ----- ---------- -------
+48    ddn	    12 prachi
+59    ddn	    14 sejal
