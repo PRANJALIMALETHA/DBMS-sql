@@ -1,0 +1,71 @@
+SQL> create table student2(id number(5) primary key,deptt char(5) NOT NULL,marks number(3) check(marks<100),class char(5) DEFAULT 'D2',adhar varchar2(10) UNIQUE);
+
+Table created.
+
+SQL> describe student2;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID					   NOT NULL NUMBER(5)
+ DEPTT					   NOT NULL CHAR(5)
+ MARKS						    NUMBER(3)
+ CLASS						    CHAR(5)
+ ADHAR						    VARCHAR2(10)
+
+
+SQL> insert into student2 values(1,'cse',90,'D2',133);
+
+1 row created.
+
+SQL> insert into student2 values(2,'cse',91,'D1',123);
+
+1 row created.
+
+SQL> select * from student2;
+
+	ID DEPTT      MARKS CLASS ADHAR
+---------- ----- ---------- ----- ----------
+	 1 cse		 90 D2	  133
+	 2 cse		 91 D1	  123
+
+
+SQL> commit;             
+
+Commit complete.
+
+SQL> insert into student2 values(3,'bsc',95,'f1',145);
+
+1 row created.
+
+SQL> insert into student2 values(4,'it-cse',145,'f2',178);
+insert into student2 values(4,'it-cse',145,'f2',178)
+                              *
+ERROR at line 1:
+ORA-12899: value too large for column "PRANJALI"."STUDENT2"."DEPTT" (actual: 6,
+maximum: 5)
+
+
+SQL> insert into student2 values(4,'it',145,'d1',123);
+insert into student2 values(4,'it',145,'d1',123)
+*
+ERROR at line 1:
+ORA-02290: check constraint (PRANJALI.SYS_C007075) violated
+
+
+SQL> select * from student2;      
+
+	ID DEPTT      MARKS CLASS ADHAR
+---------- ----- ---------- ----- ----------
+	 1 cse		 90 D2	  133
+	 2 cse		 91 D1	  123
+	 3 bsc		 95 f1	  145
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select *from student2;
+
+	ID DEPTT      MARKS CLASS ADHAR
+---------- ----- ---------- ----- ----------
+	 1 cse		 90 D2	  133
+	 2 cse		 91 D1	  123
