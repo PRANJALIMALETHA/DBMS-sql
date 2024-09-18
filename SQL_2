@@ -1,0 +1,549 @@
+ connect sys as sysdba
+Enter password: 
+Connected to an idle instance.
+SQL> startup 
+ORACLE instance started.
+
+Total System Global Area 1068937216 bytes
+Fixed Size		    2233344 bytes
+Variable Size		  658508800 bytes
+Database Buffers	  402653184 bytes
+Redo Buffers		    5541888 bytes
+Database mounted.
+Database opened.
+SQL> connect system; 
+Enter password: 
+Connected.
+SQL> conn
+Enter user-name: 123
+Enter password: 
+ERROR:
+ORA-01005: null password given; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+SQL> conn
+Enter user-name: pranjali
+Enter password: 
+Connected.
+
+conn
+Enter user-name: system
+Enter password: 
+Connected.
+SQL> grant connect,resource to pranjali;
+
+Grant succeeded.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SQL> create table Hospital(Wards number(10),Patients_Name varchar2(10),Doctor_Name varchar2(10),Bills number(20));
+
+Table created.
+
+SQL> Describe Hospital;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WARDS						    NUMBER(10)
+ PATIENTS_NAME					    VARCHAR2(10)
+ DOCTOR_NAME					    VARCHAR2(10)
+ BILLS						    NUMBER(20)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SQL> insert into hospital values(1,'ananya','ashish',1240);
+
+1 row created.
+
+SQL> insert into hospital values(2,
+  2  
+SQL> insert into hospital values(2,'pranjali','bb',1250);
+
+1 row created.
+
+SQL> insert into hospital values(3,'sejal','dr aman',1245);
+
+1 row created.
+
+SQL> insert into hospital values(4,'vaishnavi','dr shyam',2899);
+
+1 row created.
+
+SQL> select * from hospital 
+  2  
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SQL> select * from hospital;
+
+     WARDS PATIENTS_N DOCTOR_NAM      BILLS
+---------- ---------- ---------- ----------
+	 1 ananya     ashish	       1240
+	 2 pranjali   bb	       1250
+	 3 sejal      dr aman	       1245
+	 4 vaishnavi  dr shyam	       2899
+
+SQL> insert into hospital values(7,'garima','dr rohan',5600);
+
+1 row created.
+
+SQL> select * from hospital;
+
+     WARDS PATIENTS_N DOCTOR_NAM      BILLS
+---------- ---------- ---------- ----------
+	 1 ananya     ashish	       1240
+	 2 pranjali   bb	       1250
+	 3 sejal      dr aman	       1245
+	 4 vaishnavi  dr shyam	       2899
+	 7 garima     dr rohan	       5600
+
+SQL> alter table hospital add deptt varchar2(5);
+
+Table altered.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SQL> describe hospital;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WARDS						    NUMBER(10)
+ PATIENTS_NAME					    VARCHAR2(10)
+ DOCTOR_NAME					    VARCHAR2(10)
+ BILLS						    NUMBER(20)
+ DEPTT						    VARCHAR2(5)
+
+
+
+
+
+
+
+
+
+
+SQL> select * from hospital;
+
+     WARDS PATIENTS_N DOCTOR_NAM      BILLS DEPTT
+---------- ---------- ---------- ---------- -----
+	 1 ananya     ashish	       1240
+	 2 pranjali   bb	       1250
+	 3 sejal      dr aman	       1245
+	 4 vaishnavi  dr shyam	       2899
+	 7 garima     dr rohan	       5600
+
+SQL> update hospital 
+  2  set deptt ='gen'
+  3  where wards =1;
+
+1 row updated.
+
+SQL> select * from hospital;
+
+     WARDS PATIENTS_N DOCTOR_NAM      BILLS DEPTT
+---------- ---------- ---------- ---------- -----
+	 1 ananya     ashish	       1240 gen
+	 2 pranjali   bb	       1250
+	 3 sejal      dr aman	       1245
+	 4 vaishnavi  dr shyam	       2899
+	 7 garima     dr rohan	       5600
+
+
+
+SQL> alter table hospital 
+  2  modify deptt varchar2(50);  
+
+Table altered.
+
+SQL> update hospital 
+  2  set deptt='cardiology'
+  3  where wards='2';
+
+1 row updated.
+
+SQL> update hospital 
+  2  set deptt='Neurology'
+  3  where wards='2';
+
+1 row updated.
+
+SQL> update hospital 
+  2  set deptt='opd'
+  3  where wards='4';
+
+1 row updated.
+
+SQL> select * from hospital';
+ERROR:
+ORA-01756: quoted string not properly terminated
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SQL> describe hospital;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WARDS						    NUMBER(10)
+ PATIENTS_NAME					    VARCHAR2(10)
+ DOCTOR_NAME					    VARCHAR2(10)
+ BILLS						    NUMBER(20)
+ DEPTT						    VARCHAR2(50)
+
+SQL> select bills from hospital where wards=1;
+
+     BILLS
+----------
+      1240
+
+SQL> select bills from hospital where wards=2;
+
+     BILLS
+----------
+      1250
+
+-------------------------------------------------------------------------------------
+
+
+
+SQL> SELECT COUNT(PATIENTS_NAME) FROM Hospital;
+
+COUNT(PATIENTS_NAME)
+--------------------
+		   5
+
+SQL> select count( DOCTOR_NAME) from hospital;
+
+COUNT(DOCTOR_NAME)
+------------------
+		 5
+
+SQL> select count(*) from hospital 
+  2  
+SQL> select count(*) from hospital;
+
+  COUNT(*)
+----------
+	 5
+
+SQL> --count null values are exceded--
+SQL> select count( DEPTT) from hospital;
+
+COUNT(DEPTT)
+------------
+	   4
+------------------------------------------------------------------------
+
+SQL> select sum(bills) from hospital;
+
+SUM(BILLS)
+----------
+     12234
+
+SQL> select avg(bills) from hospital;
+
+AVG(BILLS)
+----------
+    2446.8
+
+SQL> select count(bills) from hospital;
+
+COUNT(BILLS)
+------------
+	   5
+
+SQL> select 12234/5
+  2  
+SQL> select 12234/5;
+select 12234/5
+---------------------------------------------------------------------------------------------
+SQL> SELECT 12234 / 5 AS result FROM dual;
+
+    RESULT
+----------
+    2446.8
+
+SQL> select NVL(bills,0) from hospital;
+
+NVL(BILLS,0)
+------------
+	1240
+	1250
+	1245
+	2899
+	5600
+
+SQL> describe hosp[ital;           
+SP2-0565: Illegal identifier.
+SQL> describe hospital;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WARDS						    NUMBER(10)
+ PATIENTS_NAME					    VARCHAR2(10)
+ DOCTOR_NAME					    VARCHAR2(10)
+ BILLS						    NUMBER(20)
+ DEPTT						    VARCHAR2(50)
+
+SQL> insert into hospital values(6,'anshika','dr ankit',null,'cardio');
+
+1 row created.
+
+SQL> select * from hospital;
+
+     WARDS PATIENTS_N DOCTOR_NAM      BILLS
+---------- ---------- ---------- ----------
+DEPTT
+--------------------------------------------------
+	 1 ananya     ashish	       1240
+gen
+
+	 2 pranjali   bb	       1250
+Neurology
+
+	 3 sejal      dr aman	       1245
+physician
+
+----------------------------------------------------------------------------------------------------------
+QL> select sum(bills) from hospital; 
+
+SUM(BILLS)
+----------
+     12234
+
+SQL> select count(bills) from hospital; 
+
+COUNT(BILLS)
+------------
+	   5
+
+SQL> select max(bills) from hospital;
+
+MAX(BILLS)
+----------
+      5600
+
+SQL> select min(bills) from hospital;
+
+MIN(BILLS)
+----------
+      1240
+
+SQL> select AVG(NVL(bills,0)) from hospital;
+
+AVG(NVL(BILLS,0))
+-----------------
+	     2039
+--------------------------------------------------------------------------------------------
+SQL> SELECT Patients_Name 
+FROM Hospital 
+WHERE Bills IS NULL;
+  2    3  
+PATIENTS_N
+----------
+anshika
+
+
+
+SQL> SELECT patients_name 
+FROM hospital 
+WHERE bills = 1240;
+  2    3  
+PATIENTS_N
+----------
+ananya
+
+
+SQL> select patients_name from hospital where name LIKE 'p%'
+  2  
+SQL> select patients_name from hospital where patients_name LIKE 'p%';
+
+PATIENTS_N
+----------
+pranjali
+
+
+
+
+
+
+
+
+SQL> select patients_name from hospital where patients_name LIKE 'v%i';
+
+PATIENTS_N
+----------
+vaishnavi
+
+
+
+SQL> select patients_name from hospital where patients_name like 'v%i';
+
+PATIENTS_N
+----------
+vaishnavi
+
+
+SQL> select patients_name from hospital where patients_name like '
+  2  
+SQL> select patients_name from hospital where patients_name like '%l'; 
+
+PATIENTS_N
+----------
+sejal
+
+SQL> select patients_name from hospital where patients_name like 'p__';
+
+no rows selected
+
+
+SQL> select patients_name from hospital where patients_name like 'p___';
+
+PATIENTS_N
+----------
+pranjali
+
+SQL> select patients_name from hospital where patients_name  like 's___';
+
+no rows selected
+
+SQL> select patients_name from hospital where patients_name like 's__';
+
+PATIENTS_N
+----------
+sejal
+
+SQL> delete from hospital;
+
+6 rows deleted.
+
+SQL> rollback;
+
+Rollback complete.
+
+
+
+
+SQL> delete from hospital where patients_name='pranjali';
+
+1 row deleted.
+
+SQL> select * from hospital;
+
+     WARDS PATIENTS_N DOCTOR_NAM      BILLS
+---------- ---------- ---------- ----------
+DEPTT
+--------------------------------------------------
+	 1 ananya     ashish	       1240
+gen
+
+	 3 sejal      dr aman	       1245
+
+
+	 4 vaishnavi  dr shyam	       2899
+
+
+
+     WARDS PATIENTS_N DOCTOR_NAM      BILLS
+---------- ---------- ---------- ----------
+DEPTT
+--------------------------------------------------
+	 7 garima     dr rohan	       5600
+
+
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from hospital;
+
+     WARDS PATIENTS_N DOCTOR_NAM      BILLS
+---------- ---------- ---------- ----------
+DEPTT
+--------------------------------------------------
+	 1 ananya     ashish	       1240
+gen
+
+	 2 pranjali   bb	       1250
+
+
+	 3 sejal      dr aman	       1245
+
+
+
+     WARDS PATIENTS_N DOCTOR_NAM      BILLS
+---------- ---------- ---------- ----------
+DEPTT
+--------------------------------------------------
+	 4 vaishnavi  dr shyam	       2899
+
+
+	 7 garima     dr rohan	       5600
+
+
+
+SQL> -- truncate will deletre all the row in go--
+SQL> --it is faster is case of dr op and delete--
+SQL> --cannot perform rollback function whereas in delete you can do rollback--
+SQL> --delete is not affecting the structure the structure so it is of dml type we can get structure by rollback operation--
+SQL> --where caluse cannot be usd with trucate command--
+SQL> --incase of truncate implict commit operation is present--
+SQL> truncate is ddl type of command--
+> 
+  2  
+SQL> select * from hospital 
+  2  
+SQL> select * from hospital;
+
+
+SQL> select bills+100 from hospital;
+
+ BILLS+100
+----------
+      1340
+      1350
+      1345
+      2999
+      5700
+
+SQL> insert into hospital values(5,'ana','dr rashmi',null);
+insert into hospital values(5,'ana','dr rashmi',null)
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+-----------------------------------------------------------------------------------------------------------
+
+SQL> insert into hospital values(5,'ana','dr aniket');     
+insert into hospital values(5,'ana','dr aniket')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+-------------------------------------------------------------------------------------------------------------
+
+SQL> insert into hospital values(5,'ana','dr rashmi',null,'physician');
+
+1 row created.
+
+SQL> select * from hospital;
+
+     WARDS PATIENTS_N DOCTOR_NAM      BILLS
+---------- ---------- ---------- ----------
+DEPTT
+--------------------------------------------------
+	 1 ananya     ashish	       1240
+gen
+
+	 2 pranjali   bb	       1250
+
+
+	 3 sejal      dr aman	       1245
+
+
+
+     WARDS PATIENTS_N DOCTOR_NAM      BILLS
+---------- ---------- ---------- ----------
+DEPTT
+--------------------------------------------------
+	 4 vaishnavi  dr shyam	       2899
+
+
+	 7 garima     dr rohan	       5600
+
+
+	 5 ana	      dr rashmi
+physician
+
+
+6 rows selected.
+
+SQL>
