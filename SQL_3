@@ -1,0 +1,446 @@
+SQL*Plus: Release 11.2.0.2.0 Production on Wed Sep 25 08:37:00 2024
+
+Copyright (c) 1982, 2011, Oracle.  All rights reserved.
+
+Use "connect username/password@XE" to connect to the database.
+SQL> connect sys as sysdba 
+Enter password: 
+Connected.
+SQL> create user Pranjali_48 identified by 123;
+create user Pranjali_48 identified by 123
+            *
+ERROR at line 1:
+ORA-01920: user name 'PRANJALI_48' conflicts with another user or role name
+
+
+SQL> conn 
+Enter user-name: system
+Enter password: 
+Connected.
+SQL> grant connect,resource to PRANJALI_48;    
+
+Grant succeeded.
+
+SQL> conn 
+Enter user-name: PRANJALI_48
+Enter password: 
+Connected.
+SQL> create table employee(      
+  2  employee id INT PRIMARY KEY;
+employee id INT PRIMARY KEY
+            *
+ERROR at line 2:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table employee(
+  2  employee id INT PRIMARY KEY,
+  3  department_name VARCHAR2(10),
+  4  NAME VARCHAR(100),
+  5  AGE  INT CHECK(AGE>18),
+  6  SALARY DECIMAL(10,2),
+  7  city VARCHAR(12)
+  8  );
+employee id INT PRIMARY KEY,
+            *
+ERROR at line 2:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table employee(
+  2  EMPLOYEE_ID INT PRIMARY KEY,
+  3  department_name VARCHAR2(10),
+  4  NAME VARCHAR(100),
+  5  AGE  INT CHECK(AGE>18),
+  6  SALARY DECIMAL(10,2),
+  7   city VARCHAR(12)
+  8  );
+
+Table created.
+
+SQL> DESCRIBE EMPLOYEE;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPLOYEE_ID				   NOT NULL NUMBER(38)
+ DEPARTMENT_NAME				    VARCHAR2(10)
+ NAME						    VARCHAR2(100)
+ AGE						    NUMBER(38)
+ SALARY 					    NUMBER(10,2)
+ CITY						    VARCHAR2(12)
+
+SQL> INSERT INTO EMPLOYEE VALUES(1,'FINANCE','RAKESH',20,'400000','DEHRADUN');
+
+1 row created.
+
+SQL> INSERT UINTO EMPLOYEE VALUES(2,'FINANCE','RAMESH',22,'303000','DEHRADUN');
+INSERT UINTO EMPLOYEE VALUES(2,'FINANCE','RAMESH',22,'303000','DEHRADUN')
+       *
+ERROR at line 1:
+ORA-00925: missing INTO keyword
+
+
+SQL> INSERT INTO EMPLOYEE VALUES(2,'FINANCE','RAMESH',22,'303000','DEHRADUN');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES(2,'MARKETING','AMAN',23,'500000','NOIDA');
+INSERT INTO EMPLOYEE VALUES(2,'MARKETING','AMAN',23,'500000','NOIDA')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (PRANJALI_48.SYS_C007163) violated
+
+
+SQL> INSERT INTO EMPLOYEE VALUES(3,'MARKETING','AMAN',23,'500000','NOIDA');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES(4,'HR','SAIJAL',24,'3000000','MUMBAI');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES(5,'IT','DEVIKA',25,'3500000','TAMIL'); 
+
+1 row created.
+
+SQL> INSERT INTO VALUES VALUES(6,'MARKETING',25,'46000000','ASAM');
+INSERT INTO VALUES VALUES(6,'MARKETING',25,'46000000','ASAM')
+            *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL>  INSERT INTO EMPLOYEE  VALUES(5,'IT','DEVIKA',25,'3500000','TAMIL'); 
+ INSERT INTO EMPLOYEE  VALUES(5,'IT','DEVIKA',25,'3500000','TAMIL')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (PRANJALI_48.SYS_C007163) violated
+
+
+SQL>  INSERT INTO EMPLOYEE  VALUES(8,'IT','DEVIKA',25,'3500000','TAMIL');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES(9,'SALES','ABIRAV',26,'4500000','PUNE');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES(4,'KANA','SHIVAM',22,'5000000','LUCKNOW');
+INSERT INTO EMPLOYEE VALUES(4,'KANA','SHIVAM',22,'5000000','LUCKNOW')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (PRANJALI_48.SYS_C007163) violated
+
+
+SQL>  INSERT INTO EMPLOYEE VALUES(11,'KANA','SHIVAM',22,'5000000','LUCKNOW');
+
+1 row created.
+
+SQL> SELECT * FROM EMPLOYEE;
+
+EMPLOYEE_ID DEPARTMENT
+----------- ----------
+NAME
+--------------------------------------------------------------------------------
+       AGE     SALARY CITY
+---------- ---------- ------------
+	  1 FINANCE
+RAKESH
+	20     400000 DEHRADUN
+
+	  2 FINANCE
+RAMESH
+	22     303000 DEHRADUN
+
+EMPLOYEE_ID DEPARTMENT
+----------- ----------
+NAME
+--------------------------------------------------------------------------------
+       AGE     SALARY CITY
+---------- ---------- ------------
+
+	  3 MARKETING
+AMAN
+	23     500000 NOIDA
+
+	  4 HR
+SAIJAL
+
+EMPLOYEE_ID DEPARTMENT
+----------- ----------
+NAME
+--------------------------------------------------------------------------------
+       AGE     SALARY CITY
+---------- ---------- ------------
+	24    3000000 MUMBAI
+
+	  5 IT
+DEVIKA
+	25    3500000 TAMIL
+
+	  8 IT
+
+EMPLOYEE_ID DEPARTMENT
+----------- ----------
+NAME
+--------------------------------------------------------------------------------
+       AGE     SALARY CITY
+---------- ---------- ------------
+DEVIKA
+	25    3500000 TAMIL
+
+	  9 SALES
+ABIRAV
+	26    4500000 PUNE
+
+
+EMPLOYEE_ID DEPARTMENT
+----------- ----------
+NAME
+--------------------------------------------------------------------------------
+       AGE     SALARY CITY
+---------- ---------- ------------
+	 11 KANA
+SHIVAM
+	22    5000000 LUCKNOW
+
+
+8 rows selected.
+
+SQL> COLUMN EMPLOYEE_ID FORMAT 9999
+COLUMN NAME FORMAT A20
+COLUMN AGE FORMAT 999
+COLUMN SALARY FORMAT 9999999
+COLUMN CITY FORMAT A15
+SET LINESIZE 120SQL> SQL> SQL> SQL> SQL> 
+SQL> SELECT * FROM EMPLOYEE;
+
+EMPLOYEE_ID DEPARTMENT NAME		     AGE   SALARY CITY
+----------- ---------- -------------------- ---- -------- ---------------
+	  1 FINANCE    RAKESH		      20   400000 DEHRADUN
+	  2 FINANCE    RAMESH		      22   303000 DEHRADUN
+	  3 MARKETING  AMAN		      23   500000 NOIDA
+	  4 HR	       SAIJAL		      24  3000000 MUMBAI
+	  5 IT	       DEVIKA		      25  3500000 TAMIL
+	  8 IT	       DEVIKA		      25  3500000 TAMIL
+	  9 SALES      ABIRAV		      26  4500000 PUNE
+	 11 KANA       SHIVAM		      22  5000000 LUCKNOW
+
+8 rows selected.
+
+SQL> SELECT COUNT(*) FROM EMPLOYEE;
+
+  COUNT(*)
+----------
+	 8
+
+SQL> SELECT * FROM EMPLOYEE WHERE AGE=22;
+
+EMPLOYEE_ID DEPARTMENT NAME		     AGE   SALARY CITY
+----------- ---------- -------------------- ---- -------- ---------------
+	  2 FINANCE    RAMESH		      22   303000 DEHRADUN
+	 11 KANA       SHIVAM		      22  5000000 LUCKNOW
+
+SQL> SELECT EMPLOYEE_ID,NAME,DEPARTMENT FROM EMPLOYEE WHERE SALARY>=500000;
+\SELECT EMPLOYEE_ID,NAME,DEPARTMENT FROM EMPLOYEE WHERE SALARY>=500000
+                        *
+ERROR at line 1:
+ORA-00904: "DEPARTMENT": invalid identifier
+
+
+SQL> SELECT EMPLOYEE_ID,NAME,DEPARTMENT_NAME FROM EMPLOYEE WHERE SALARY>=5000000;    
+SP2-0734: unknown command beginning "\SELECT EM..." - rest of line ignored.
+SQL> DESCRIBE EMPLOYEE;
+ Name								   Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ EMPLOYEE_ID							   NOT NULL NUMBER(38)
+ DEPARTMENT_NAME							    VARCHAR2(10)
+ NAME									    VARCHAR2(100)
+ AGE									    NUMBER(38)
+ SALARY 								    NUMBER(10,2)
+ CITY									    VARCHAR2(12)
+
+SQL> SELECT EMPLOYEE_ID ,DEPARTMENT_NAME,name EMPLOYEE WHERE SALARY>=5000000;    
+SELECT EMPLOYEE_ID ,DEPARTMENT_NAME,name EMPLOYEE WHERE SALARY>=5000000
+                                                  *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> SELECT EMPLOYEE_ID ,DEPARTMENT_NAME,name FROM EMPLOYEE WHERE SALARY>=5000000;    
+
+EMPLOYEE_ID DEPARTMENT NAME
+----------- ---------- --------------------
+	 11 KANA       SHIVAM
+
+SQL> select * from employee;                       
+
+EMPLOYEE_ID DEPARTMENT NAME		     AGE   SALARY CITY
+----------- ---------- -------------------- ---- -------- ---------------
+	  1 FINANCE    RAKESH		      20   400000 DEHRADUN
+	  2 FINANCE    RAMESH		      22   303000 DEHRADUN
+	  3 MARKETING  AMAN		      23   500000 NOIDA
+	  4 HR	       SAIJAL		      24  3000000 MUMBAI
+	  5 IT	       DEVIKA		      25  3500000 TAMIL
+	  8 IT	       DEVIKA		      25  3500000 TAMIL
+	  9 SALES      ABIRAV		      26  4500000 PUNE
+	 11 KANA       SHIVAM		      22  5000000 LUCKNOW
+
+8 rows selected.
+
+SQL> select name from employee where name like 'R%'; 
+
+NAME
+--------------------
+RAKESH
+RAMESH
+
+SQL> select name from employee where name like 'R__';
+
+no rows selected
+
+SQL> select name from employee where name like 'A_';
+
+NAME
+--------------------
+AMAN
+
+SQL> select name from employee where name like 'A%N';
+
+NAME
+--------------------
+AMAN
+
+SQL> select name from employee where name like 'A%';
+
+NAME
+--------------------
+AMAN
+ABIRAV
+
+SQL> select name from employee where name like '%V';
+
+NAME
+--------------------
+ABIRAV
+
+SQL> select name from employee  where salary IN( 400000,4500000);
+
+NAME
+--------------------
+RAKESH
+ABIRAV
+
+SQL> select name from employee where EMPLOYEE_ID between(1,10);
+select name from employee where EMPLOYEE_ID between(1,10)
+                                                     *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> update employee set name='Pranjali' where id='9';
+update employee set name='Pranjali' where id='9'
+                                          *
+ERROR at line 1:
+ORA-00904: "ID": invalid identifier
+
+
+SQL> select name from employee where EMPLOYEE_ID between 1 and 10;                            
+
+NAME
+--------------------
+RAKESH
+RAMESH
+AMAN
+SAIJAL
+DEVIKA
+DEVIKA
+ABIRAV
+
+7 rows selected.
+
+SQL> select name from employee where employee id between 2 and 6;
+select name from employee where employee id between 2 and 6
+                                         *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> select name from employee where EMPLOYEE_ID between 1 and 6;
+
+NAME
+--------------------
+RAKESH
+RAMESH
+AMAN
+SAIJAL
+DEVIKA
+
+SQL> select min(salary) from employee;
+
+MIN(SALARY)
+-----------
+     303000
+
+SQL> select distinct salary from employee;
+
+  SALARY
+--------
+ 5000000
+ 3000000
+ 3500000
+  303000
+ 4500000
+  400000
+  500000
+
+7 rows selected.
+
+SQL> select max(salary) from employee;
+
+MAX(SALARY)
+-----------
+    5000000
+
+SQL> select name from employee where  salary=(select max(salary) from employee);
+
+NAME
+--------------------
+SHIVAM
+
+SQL> select max(salary) from employee where salary<>(select max(salary) from employee);
+
+MAX(SALARY)
+-----------
+    4500000
+
+SQL> select salary from employee where salary>(select avg(salary) from employee);
+
+  SALARY
+--------
+ 3000000
+ 3500000
+ 3500000
+ 4500000
+ 5000000
+
+SQL> select name,select salary from employee where salary>(select avg(salary) from employee);
+select name,select salary from employee where salary>(select avg(salary) from employee)
+            *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select name ,salary from employee where marks<(select avg(salary) from employee);
+select name ,salary from employee where marks<(select avg(salary) from employee)
+                                        *
+ERROR at line 1:
+ORA-00904: "MARKS": invalid identifier
+
+
+SQL> select name,salary from employee where salary<(select avg(salary) from employee);
+
+NAME		       SALARY
+-------------------- --------
+RAKESH		       400000
+RAMESH		       303000
+AMAN		       500000
