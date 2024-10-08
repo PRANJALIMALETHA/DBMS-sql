@@ -1,0 +1,235 @@
+SQL> select * from supplier;
+
+        ID
+----------
+SUP_NAME
+--------------------------------------------------------------------------------
+ITEMM
+--------------------------------------------------------------------------------
+     PRICE
+----------
+CITY
+--------------------------------------------------------------------------------
+        51
+survesh
+keyboard
+
+        ID
+----------
+SUP_NAME
+--------------------------------------------------------------------------------
+ITEMM
+--------------------------------------------------------------------------------
+     PRICE
+----------
+CITY
+--------------------------------------------------------------------------------
+       400
+hybrid
+
+
+        ID
+----------
+SUP_NAME
+--------------------------------------------------------------------------------
+ITEMM
+--------------------------------------------------------------------------------
+     PRICE
+----------
+CITY
+--------------------------------------------------------------------------------
+        52
+kiran
+processor
+
+        ID
+----------
+SUP_NAME
+--------------------------------------------------------------------------------
+ITEMM
+--------------------------------------------------------------------------------
+     PRICE
+----------
+CITY
+--------------------------------------------------------------------------------
+      8000
+delhi
+
+
+        ID
+----------
+SUP_NAME
+--------------------------------------------------------------------------------
+ITEMM
+--------------------------------------------------------------------------------
+     PRICE
+----------
+CITY
+--------------------------------------------------------------------------------
+        53
+mohan
+mouse
+
+        ID
+----------
+SUP_NAME
+--------------------------------------------------------------------------------
+ITEMM
+--------------------------------------------------------------------------------
+     PRICE
+----------
+CITY
+--------------------------------------------------------------------------------
+       350
+dehra
+
+
+        ID
+----------
+SUP_NAME
+--------------------------------------------------------------------------------
+ITEMM
+--------------------------------------------------------------------------------
+     PRICE
+----------
+CITY
+--------------------------------------------------------------------------------
+         1
+pp
+lap
+
+        ID
+----------
+SUP_NAME
+--------------------------------------------------------------------------------
+ITEMM
+--------------------------------------------------------------------------------
+     PRICE
+----------
+CITY
+--------------------------------------------------------------------------------
+     50000
+jaipur
+
+
+SQL> describe supplier;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ SUP_NAME                                           VARCHAR2(80)
+ ITEMM                                              VARCHAR2(80)
+ PRICE                                              NUMBER(38)
+ CITY                                               VARCHAR2(80)
+
+SQL> select sup_name and item where sup_name like 'p%';
+select sup_name and item where sup_name like 'p%'
+                *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select sup_name,item where sup_name like 'p%';
+select sup_name,item where sup_name like 'p%'
+                     *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select sup_name ,item
+  2  from supplier
+  3  where sup_name like 'p%';
+select sup_name ,item
+                 *
+ERROR at line 1:
+ORA-00904: "ITEM": invalid identifier
+
+
+SQL> select sup_name ,id
+  2  from supplier
+  3  where sup_name like 'p%';
+
+SUP_NAME
+--------------------------------------------------------------------------------
+        ID
+----------
+pp
+         1
+
+
+SQL> select sup_name
+  2  from supplier
+  3  where sup_name like '%p' and id=1;
+
+SUP_NAME
+--------------------------------------------------------------------------------
+pp
+
+SQL> select sup_name
+  2  from supplier
+  3  where item
+  4
+SQL> update supplier
+  2  set price=price+200
+  3  where item='keyboard';
+where item='keyboard'
+      *
+ERROR at line 3:
+ORA-00904: "ITEM": invalid identifier
+
+
+SQL> describe supplier;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ SUP_NAME                                           VARCHAR2(80)
+ ITEMM                                              VARCHAR2(80)
+ PRICE                                              NUMBER(38)
+ CITY                                               VARCHAR2(80)
+
+SQL> update supplier
+  2  set price=price+200
+  3  where itemm=='lapi';
+where itemm=='lapi'
+            *
+ERROR at line 3:
+ORA-00936: missing expression
+
+
+SQL> update supplier
+  2  set price=price+200
+  3  where item='lapi';
+where item='lapi'
+      *
+ERROR at line 3:
+ORA-00904: "ITEM": invalid identifier
+
+
+SQL> update supplier
+  2  set price=price+200
+  3  where itemm='lapi';
+
+0 rows updated.
+
+SQL> alter supplier
+  2  m
+  3
+SQL> alter table supplier
+  2  add contactno int;
+
+Table altered.
+
+SQL> describe supplier;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ SUP_NAME                                           VARCHAR2(80)
+ ITEMM                                              VARCHAR2(80)
+ PRICE                                              NUMBER(38)
+ CITY                                               VARCHAR2(80)
+ CONTACTNO                                          NUMBER(38)
+
+SQL> delete from supplier
+  2  where price=(select min(price) from supplier)
+  3  ;
+
+1 row deleted.
